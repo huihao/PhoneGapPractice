@@ -1,66 +1,46 @@
-<!doctype html>
-<html lang="zh">
-<head>
-<meta charset="utf-8">
-<meta name="format-detection" content="telephone=no">
-<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi">
-<link rel="stylesheet" href="common/css/base.css" />
-<link rel="stylesheet" href="css/index.css" />
-<script src="js/zepto.js"></script>
-<script src="cordova.js"></script>
-<script>
-ajaxGet = function(url, data, func, sync) {
-	$.ajax({
-		"type": "GET",
-		"url": url,
-		"data": data,
-		"dataType": "xml",
-		"async": !sync,
-		"timeout": 21000,
-		"global": false,
-		"success": func,
-		"error": function(xhr, type, err) {
-			alert("error");
-		}
-	});
-}
- $(document).ready(function(){
-	    ajaxGet("http://60.187.2.6:22322/TestWebService.asmx/HelloWorld", null, function(data) {
-           alert($(data).find("string").text());
-    });
-	$("#test").click(function(e){
-		ajaxGet("http://60.187.2.6:22322/TestWebService.asmx/Test", null, function(data) {
-			var d=JSON.parse($(data).find("string").text())
-			for(var i=0;i<4;i++)
-			{
-				$("#testul").append("<li>"+d[i]+"</li>");
-			}
-          
-    });
-	});
-	$("#sub").click(function(e){
-		ajaxGet("http://60.187.2.6:22322/TestWebService.asmx/Submit", {name:$("#name").val()}, function(data) {
-			alert("success")
-			var d=JSON.parse($(data).find("string").text());
-			$("#reply").html(d);
-    });
-	});
- });
-</script>
-</head>
-<body>
-	<header id="fixed">
-      <h1>HelloWorld</h1>
-    </header>
-	<section>
-         <p id="p">HelloWorld</p>
-          <input type="text" id="name"/>
-		  <p id="reply"></p>
-		 <input type="button" id="sub" text="dfefe" value="submit"  />
-		<input type="button" id="test" text="dfefe" value="dfjie"  />
-		 <ul id="testul">
-		 <li>test</li>
-		 </ul>
-	</section>
-</body>
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>PhoneGap</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
 </html>
